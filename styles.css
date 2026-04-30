@@ -870,7 +870,7 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
   .sticky-note      { width: 90px;  font-size: 0.72rem; padding: 8px 6px 10px; }
   .sticky-note.welcome-note { width: 80px; padding: 10px 6px 8px; }
   .welcome-text     { font-size: 1.05rem; }
-  .sticky-note.bottom-right { width: 88px; top: 160px; right: 10px; font-size: 0.7rem; }
+  .sticky-note.bottom-right { width: 88px; top: auto; bottom: 40px; right: 10px; font-size: 0.7rem; }
 
   /* page title slightly smaller */
   h1.page-title { font-size: clamp(2.4rem, 10vw, 3rem); }
@@ -1187,7 +1187,9 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
 }
 
 /* ---------- Mobile-only PDF buttons (hidden on desktop) ---------- */
-.doc-mobile { display: none; }
+@media (min-width: 721px) {
+  .doc-mobile { display: none; }
+}
 
 .doc-btn {
   display: flex;
