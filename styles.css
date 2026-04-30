@@ -834,10 +834,31 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
     opacity: 0.65;
   }
 
-  /* doc viewer (cv/resume) — replace iframe with two PDF-link buttons on mobile */
+  /* doc viewer (cv/resume) — replace iframe with two PDF-link buttons on mobile.
+     Use higher specificity so we win against the baseline rules later in the file. */
   .doc-mobile { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
-  .doc-control { display: none; }
-  .doc-frame { display: none; }
+  .doc-viewer .doc-control { display: none; }
+  .doc-viewer .doc-frame { display: none; }
+
+  /* contact list — stack the blue label above the link on mobile (higher specificity) */
+  .page .contact-list strong {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0.2rem;
+    min-width: 0;
+  }
+  .page .contact-list li {
+    margin-bottom: 1.25rem;
+  }
+
+  /* sticky note on contact: pin to bottom of page (higher specificity beats the baseline) */
+  .page .sticky-note.bottom-right {
+    top: auto;
+    bottom: 50px;
+    right: 14px;
+    width: 100px;
+    font-size: 0.74rem;
+  }
 }
 
 /* very small phones (≤ 420px) — iPhone SE, narrow Androids */
@@ -870,7 +891,7 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
   .sticky-note      { width: 90px;  font-size: 0.72rem; padding: 8px 6px 10px; }
   .sticky-note.welcome-note { width: 80px; padding: 10px 6px 8px; }
   .welcome-text     { font-size: 1.05rem; }
-  .sticky-note.bottom-right { width: 88px; top: auto; bottom: 40px; right: 10px; font-size: 0.7rem; }
+  .page .sticky-note.bottom-right { width: 88px; top: auto; bottom: 40px; right: 10px; font-size: 0.7rem; }
 
   /* page title slightly smaller */
   h1.page-title { font-size: clamp(2.4rem, 10vw, 3rem); }
