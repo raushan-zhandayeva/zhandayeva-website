@@ -73,6 +73,28 @@
     <p class="lead">You can see my academic CV and professional resume below.</p>
 
     <div class="doc-viewer">
+      <!-- Mobile-only: clean buttons that open the PDFs in a new tab -->
+      <div class="doc-mobile">
+        <a class="doc-btn" href="cv.pdf" target="_blank" rel="noopener">
+          <span class="doc-btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M 6 3 L 16 3 L 20 7 L 20 21 L 6 21 Z"/><path d="M 16 3 L 16 7 L 20 7"/><line x1="9" y1="13" x2="17" y2="13"/><line x1="9" y1="17" x2="17" y2="17"/></svg>
+          </span>
+          <span class="doc-btn__label">
+            <strong>open cv</strong>
+            <em>academic, full-length</em>
+          </span>
+        </a>
+        <a class="doc-btn" href="resume.pdf" target="_blank" rel="noopener">
+          <span class="doc-btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M 6 3 L 16 3 L 20 7 L 20 21 L 6 21 Z"/><path d="M 16 3 L 16 7 L 20 7"/><line x1="9" y1="13" x2="17" y2="13"/><line x1="9" y1="17" x2="17" y2="17"/></svg>
+          </span>
+          <span class="doc-btn__label">
+            <strong>open resume</strong>
+            <em>one-page, professional</em>
+          </span>
+        </a>
+      </div>
+
       <div class="doc-control">
         <span class="doc-status" aria-live="polite">looking at: <strong id="doc-current">cv</strong></span>
         <button type="button" id="doc-flip-button" class="doc-flip-button" aria-label="Flip to other document">

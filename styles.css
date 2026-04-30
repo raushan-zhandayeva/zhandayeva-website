@@ -52,6 +52,7 @@
 }
 
 html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
 
 body {
   background-color: #c6ad6e;
@@ -796,7 +797,16 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
     padding-bottom: 0.8rem;
   }
 
-  /* sticky notes — smaller, tucked corners, won't cover content */
+  /* site title — much smaller on mobile so it fits one line, marker font is wide */
+  .site-title {
+    font-size: 1.7rem;
+    padding: 0.16em 0.4em 0.2em;
+  }
+
+  /* page title (h1 inside main) — smaller on mobile */
+  h1.page-title { font-size: 2.6rem; }
+
+  /* sticky notes — smaller, tucked corners */
   .sticky-note {
     width: 110px;
     font-size: 0.78rem;
@@ -809,11 +819,13 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
     padding: 12px 8px 10px;
   }
   .welcome-text { font-size: 1.3rem; }
+  /* contact-page sticky: pin to bottom of page so it can't overlap email/links */
   .sticky-note.bottom-right {
-    top: 180px;
-    right: 12px;
-    width: 110px;
-    font-size: 0.76rem;
+    top: auto;
+    bottom: 50px;
+    right: 14px;
+    width: 100px;
+    font-size: 0.74rem;
   }
 
   /* doodles smaller and slightly faded so they don't fight content */
@@ -822,10 +834,10 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
     opacity: 0.65;
   }
 
-  /* doc viewer (cv/resume) */
-  .doc-control { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
-  .doc-flip-button { font-size: 1.3rem; }
-  .doc-frame { height: 65vh; min-height: 420px; }
+  /* doc viewer (cv/resume) — replace iframe with two PDF-link buttons on mobile */
+  .doc-mobile { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .doc-control { display: none; }
+  .doc-frame { display: none; }
 }
 
 /* very small phones (≤ 420px) — iPhone SE, narrow Androids */
@@ -835,7 +847,11 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
   .page::after  { left: -16px; width: 32px; background-size: 32px 32px; }
   .site-header__inner { padding: 0.85rem 0.7rem 0; }
 
-  .site-title { font-size: 2.0rem; }
+  .site-title {
+    font-size: 1.4rem;
+    padding: 0.14em 0.36em 0.18em;
+  }
+  h1.page-title { font-size: 2.2rem; }
   .site-nav a {
     font-size: 0.85rem;
     padding: 0.5rem 0.6rem 0.6rem;
@@ -859,7 +875,7 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
   /* page title slightly smaller */
   h1.page-title { font-size: clamp(2.4rem, 10vw, 3rem); }
 
-  .doc-frame { height: 60vh; min-height: 360px; }
+  /* doc-frame already hidden via 720px breakpoint; keep buttons in place */
 }
 
 /* ---------- Item lists ---------- */
@@ -1168,6 +1184,57 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
 .doc-viewer {
   margin-top: 1.5rem;
   perspective: 1600px;
+}
+
+/* ---------- Mobile-only PDF buttons (hidden on desktop) ---------- */
+.doc-mobile { display: none; }
+
+.doc-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  padding: 1rem 1.1rem;
+  background: var(--paper);
+  background-image:
+    linear-gradient(to bottom, rgba(255,255,255,0.45), rgba(255,255,255,0) 30%, rgba(0,0,0,0.04));
+  border: 1.5px solid var(--ink);
+  border-radius: 9px;
+  text-decoration: none;
+  color: var(--ink-deep);
+  font-family: var(--hand2);
+  box-shadow: 3px 3px 0 var(--ink), inset 0 1.5px 0 rgba(255,255,255,0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.doc-btn:hover, .doc-btn:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink), inset 0 1.5px 0 rgba(255,255,255,0.6);
+  background-color: var(--hl-yellow);
+  outline: none;
+}
+.doc-btn__icon {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  color: var(--pen-red);
+}
+.doc-btn__icon svg { width: 100%; height: 100%; }
+.doc-btn__label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.doc-btn__label strong {
+  font-family: var(--hand);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--ink-deep);
+  letter-spacing: 0.01em;
+}
+.doc-btn__label em {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-top: 1px;
 }
 
 .doc-control {
@@ -1595,6 +1662,23 @@ ul.plain li { margin-bottom: 0.55rem; color: var(--ink); }
     rgba(255, 255, 255, 0.5) 5px,
     rgba(255, 255, 255, 0.5) 9px
   );
+}
+
+/* WIP page corner washi tape — pinned far enough out that it never touches the page title */
+.washi-tape--wip-corner {
+  top: 36px;
+  right: 70px;
+  width: 80px;
+  --rot: -15deg;
+}
+@media (max-width: 720px) {
+  .washi-tape--wip-corner {
+    top: 14px;
+    right: 8px;
+    width: 60px;
+    height: 18px;
+    --rot: -22deg;
+  }
 }
 
 .washi-tape--dot {
