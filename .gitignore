@@ -3,3 +3,9 @@
 .idea/
 .vscode/
 node_modules/
+
+# local previews / build artifacts (not deployed)
+logo-preview.png
+favicon-preview.png
+build-og.py
+og-image.png
