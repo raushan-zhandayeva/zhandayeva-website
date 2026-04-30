@@ -1,7 +1,5 @@
 # zhandayeva.com
 
-Personal academic website for Raushan Zhandayeva — postdoctoral fellow at GW's Institute for Data, Democracy, and Politics.
-
 Static HTML/CSS, no build step. Hosted on GitHub Pages with a custom domain.
 
 ## Pages
